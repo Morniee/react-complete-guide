@@ -16,35 +16,10 @@ class App extends Component {
     showPersons: false
   }
 
-  switchNameHandler = (newName) => {
-    // DON'T DO THIS => this.state.persons[0] = "Sergej"
-    //
-    // will override the persons in the state.
-    this.setState({
-      persons: [
-        {
-          name: newName,
-          age: "26"
-        }, {
-          name: "Niels",
-          age: "26"
-        }
-      ]
-    })
-  }
-
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        {
-          name: event.target.value,
-          age: "26"
-        }, {
-          name: "Niels",
-          age: "26"
-        }
-      ]
-    })
+  deletePersonHandler = (index) => {
+    const persons = this.state.persons;
+    persons.splice(index, 1);
+    this.setState({persons: persons});
   }
 
   togglePersonsHandler = () => {
@@ -66,10 +41,11 @@ class App extends Component {
     if(this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
+          {this.state.persons.map((person, index) => {
             return <Person
               name={person.name}
-              age={person.age} />
+              age={person.age}
+              click={() => this.deletePersonHandler(index)} />
           })}
         </div>
       );
