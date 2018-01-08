@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
+import UserInput from './UserInput/UserInput';
+import UserOutput from './UserOutput/UserOutput';
 
 class App extends Component {
   state = {
-    persons: [
+    /*persons: [
       {
         name: "Kevin",
         age: "24"
@@ -12,9 +14,10 @@ class App extends Component {
         name: "Niels",
         age: "26"
       }
-    ]
+    ],*/
+    username: "Kevin"
   }
-
+  /*
   switchNameHandler = (newName) => {
     // DON'T DO THIS => this.state.persons[0] = "Sergej"
     //
@@ -28,7 +31,8 @@ class App extends Component {
           name: "Niels",
           age: "26"
         }
-      ]
+      ],
+      username: ""
     })
   }
 
@@ -45,6 +49,12 @@ class App extends Component {
       ]
     })
   }
+  */
+  setUsernameHandler = (event) => {
+    this.setState({
+      username: event.target.value
+    })
+  }
 
   render() {
     const style = {
@@ -59,7 +69,7 @@ class App extends Component {
       <div className="App">
         <h1> Hi, I'm a React App</h1>
         <p> This is really working</p>
-        <button
+        {/*<button
           onClick={this.switchNameHandler.bind(this, "Sergej")}
           style={style}>Switch name</button>
         <Person
@@ -72,7 +82,14 @@ class App extends Component {
           age={this.state.persons[1].age}
           //call anonymous function which then returns a function call. Now u can pass data easily.
           //binding is more efficient.
-          click={() => { this.switchNameHandler("Jim")}}>My hobbies are football.</Person>
+          click={() => { this.switchNameHandler("Jim")}}>My hobbies are football.</Person>*/}
+          <UserInput
+            username={this.state.username}
+            change={this.setUsernameHandler} />
+          <UserOutput
+            username={this.state.username} />
+          <UserOutput
+            username={this.state.username} />
     </div>);
   }
 }
