@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-import UserInput from './UserInput/UserInput';
-import UserOutput from './UserOutput/UserOutput';
 
 class App extends Component {
   state = {
-    /*persons: [
+    persons: [
       {
         name: "Kevin",
         age: "24"
@@ -14,10 +12,10 @@ class App extends Component {
         name: "Niels",
         age: "26"
       }
-    ],*/
-    username: "Kevin"
+    ],
+    showPersons: false
   }
-  /*
+
   switchNameHandler = (newName) => {
     // DON'T DO THIS => this.state.persons[0] = "Sergej"
     //
@@ -31,8 +29,7 @@ class App extends Component {
           name: "Niels",
           age: "26"
         }
-      ],
-      username: ""
+      ]
     })
   }
 
@@ -49,11 +46,11 @@ class App extends Component {
       ]
     })
   }
-  */
-  setUsernameHandler = (event) => {
-    this.setState({
-      username: event.target.value
-    })
+
+  togglePersonsHandler = () => {
+      this.setState({
+        showPersons: !this.state.showPersons
+      })
   }
 
   render() {
@@ -69,28 +66,27 @@ class App extends Component {
       <div className="App">
         <h1> Hi, I'm a React App</h1>
         <p> This is really working</p>
-        {/*<button
-          onClick={this.switchNameHandler.bind(this, "Sergej")}
+        <button
+          onClick={this.togglePersonsHandler}
           style={style}>Switch name</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          click={this.switchNameHandler.bind(this, "Sam")}
-          changed={this.nameChangedHandler}>My hobbies are programming.</Person>
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          //call anonymous function which then returns a function call. Now u can pass data easily.
-          //binding is more efficient.
-          click={() => { this.switchNameHandler("Jim")}}>My hobbies are football.</Person>*/}
-          <UserInput
-            username={this.state.username}
-            change={this.setUsernameHandler} />
-          <UserOutput
-            username={this.state.username} />
-          <UserOutput
-            username={this.state.username} />
-    </div>);
+        {
+          this.state.showPersons ?
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+              click={this.switchNameHandler.bind(this, "Sam")}
+              changed={this.nameChangedHandler}>My hobbies are programming.</Person>
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              //call anonymous function which then returns a function call. Now u can pass data easily.
+              //binding is more efficient.
+              click={() => { this.switchNameHandler("Jim")}}>My hobbies are football.</Person>
+          </div> : null
+        }
+      </div>
+    );
   }
 }
 
