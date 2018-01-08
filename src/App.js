@@ -62,29 +62,34 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    let persons = null;
+    if(this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+            click={this.switchNameHandler.bind(this, "Sam")}
+            changed={this.nameChangedHandler}>My hobbies are programming.</Person>
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            //call anonymous function which then returns a function call. Now u can pass data easily.
+            //binding is more efficient.
+            click={() => { this.switchNameHandler("Jim")}}>My hobbies are football.</Person>
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1> Hi, I'm a React App</h1>
         <p> This is really working</p>
         <button
           onClick={this.togglePersonsHandler}
-          style={style}>Switch name</button>
-        {
-          this.state.showPersons ?
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-              click={this.switchNameHandler.bind(this, "Sam")}
-              changed={this.nameChangedHandler}>My hobbies are programming.</Person>
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              //call anonymous function which then returns a function call. Now u can pass data easily.
-              //binding is more efficient.
-              click={() => { this.switchNameHandler("Jim")}}>My hobbies are football.</Person>
-          </div> : null
-        }
+          style={style}>Toggle Persons</button>
+
+        {persons}
       </div>
     );
   }
