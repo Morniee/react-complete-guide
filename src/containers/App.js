@@ -16,11 +16,13 @@ class App extends Component {
     console.log('[App.js] Inside componentDidMount');
   }
 
+  /*
   shouldComponentUpdate(nextProps, nextState) {
     console.log('[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState);
-    return true;
+    return nextState.persons !== this.state.persons ||
+      nextState.showPersons !== this.state.showPersons;
   }
-
+  */
   componentWillUpdate(nextProps, nextState) {
     console.log('[UPDATE App.js] Inside componentWillUpdate', nextProps, nextState);
   }
@@ -89,6 +91,7 @@ class App extends Component {
 
     return (
       <div className={styles.App}>
+        <button onClick={() => {this.setState({showPersons: true})}}>Show Persons </button>
         <Cockpit
           showPersons={this.state.showPersons}
           persons={this.state.persons}
